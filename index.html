@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Construction Portfolio</title>
+  <link href="./dist/output.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+
+<style>
+    html {
+        scroll-behavior: smooth;
+        overflow-x:hidden;
+    }
+
+    body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+    /* Add this to your custom CSS file */
+.text-outline {
+  position: relative;
+  display: inline-block;
+}
+
+.text-outline::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--primary-color); /* Replace with your primary color */
+  z-index: -1;
+  filter: blur(2px);
+  -webkit-background-clip: text;
+  background-clip: text;
+  opacity: 0.7; /* Adjust as needed */
+  transform: translate(2px, 2px); /* Adjust for desired effect */
+}
+
+.carousel-inner {
+  display: flex;
+  transition: transform 0.5s ease-in-out; /* Adjust the duration and easing as needed */
+}
+
+.carousel-item {
+  min-width: 100%;
+  transition: opacity 0.5s ease-in-out; /* Optional: if you want to fade slides */
+}
+
+.indicator-button {
+  background-color: #3a3a3c; /* Default color */
+  border: 2px solid transparent;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.indicator-button.active {
+  background-color: #fde010; /* Active color */
+  border-color: #3a3a3c; /* Optional: border color for active state */
+  color: #3a3a3c;
+}
+</style>
+<body class="bg-white text-gray-800 overflow-x-hidden">
+
+ <!-- Header -->
+<header class="absolute top-0 w-full shadow-lg z-50 bg-white">
+    <div class="container mx-auto flex justify-between items-center py-4 px-6 lg:px-12">
+        <!-- Logo on the Left -->
+        <div class="text-3xl">
+            <img src="images/logo.webp" alt="Logo" class="w-24"> <!-- Adjust logo size -->
+        </div>
+    
+        <!-- Navbar Links in the Center -->
+        <nav class="hidden lg:flex space-x-8 items-center text-lg">
+            <a href="#home" class="hover:text-yellow-500 transition-colors duration-300">Home</a>
+            <a href="#projects" class="hover:text-yellow-500 transition-colors duration-300">Projects</a>
+            <a href="#services" class="hover:text-yellow-500 transition-colors duration-300">Services</a>
+            <a href="#testimonials" class="hover:text-yellow-500 transition-colors duration-300">Testimonials</a>
+            <a href="#faq" class="hover:text-yellow-500 transition-colors duration-300">FAQ</a>
+            <a href="#contact" class="hover:text-yellow-500 transition-colors duration-300">Contact</a>
+        </nav>
+    
+        <!-- Social Media Icons on the Right -->
+        <div class="hidden lg:flex space-x-6 items-center">
+            <a href="https://www.facebook.com" target="_blank" class="text-gray-700 hover:text-blue-600 transition-colors duration-300">
+                <i class="fab fa-facebook text-2xl"></i>
+            </a>
+            <a href="https://www.twitter.com" target="_blank" class="text-gray-700 hover:text-blue-400 transition-colors duration-300">
+                <i class="fab fa-twitter text-2xl"></i>
+            </a>
+            <a href="https://www.instagram.com" target="_blank" class="text-gray-700 hover:text-pink-500 transition-colors duration-300">
+                <i class="fab fa-instagram text-2xl"></i>
+            </a>
+        </div>
+    
+        <!-- Burger Menu for Small Screens -->
+        <div class="lg:hidden">
+            <button id="burger" class="text-gray-700 focus:outline-none">
+                <i class="fas fa-bars text-3xl"></i>
+            </button>
+        </div>
+    </div>
+    
+
+  <!-- Mobile Menu -->
+<div id="mobileMenu" class="fixed inset-0 bg-white text-yellow-500 shadow-lg transform -translate-y-full transition-transform duration-300 ease-in-out lg:hidden z-50">
+    <div class="flex flex-col h-full">
+        <!-- Close Button in the Mobile Menu -->
+        <button id="closeMenu" class="absolute top-4 right-4 text-yellow-500 text-2xl focus:outline-none">
+            <i class="fas fa-times"></i>
+        </button>
+
+        <!-- Social Media Icons at the Top -->
+        <div class="flex justify-center space-x-6 mt-6 mb-4">
+            <a href="https://www.facebook.com" target="_blank" class="text-primary mt-10 hover:text-blue-600 transition-colors duration-300">
+                <i class="fab fa-facebook text-4xl"></i>
+            </a>
+            <a href="https://www.twitter.com" target="_blank" class="text-primary mt-10 hover:text-blue-400 transition-colors duration-300">
+                <i class="fab fa-twitter text-4xl"></i>
+            </a>
+            <a href="https://www.instagram.com" target="_blank" class="text-primary mt-10 hover:text-pink-500 transition-colors duration-300">
+                <i class="fab fa-instagram text-4xl"></i>
+            </a>
+        </div>
+
+        <!-- Navigation Links with Icons in 2x3 Grid -->
+<nav class="flex flex-wrap items-center justify-center h-full p-4">
+    <div class="flex flex-col items-center w-1/2 p-1">
+        <a href="#home" class="flex flex-col items-center w-full bg-gray-800 text-yellow-500 rounded-lg py-3 px-2 text-center hover:bg-gray-700 transition-colors duration-300" onclick="closeMenu()">
+            <i class="fas fa-home text-3xl mb-1"></i>
+            <span class="text-lg">Home</span>
+        </a>
+    </div>
+    <div class="flex flex-col items-center w-1/2 p-1">
+        <a href="#projects" class="flex flex-col items-center w-full bg-gray-800 text-yellow-500 rounded-lg py-3 px-2 text-center hover:bg-gray-700 transition-colors duration-300" onclick="closeMenu()">
+            <i class="fas fa-project-diagram text-3xl mb-1"></i>
+            <span class="text-lg">Projects</span>
+        </a>
+    </div>
+    <div class="flex flex-col items-center w-1/2 p-1">
+        <a href="#services" class="flex flex-col items-center w-full bg-gray-800 text-yellow-500 rounded-lg py-3 px-2 text-center hover:bg-gray-700 transition-colors duration-300" onclick="closeMenu()">
+            <i class="fas fa-concierge-bell text-3xl mb-1"></i>
+            <span class="text-lg">Services</span>
+        </a>
+    </div>
+    <div class="flex flex-col items-center w-1/2 p-1">
+        <a href="#testimonials" class="flex flex-col items-center w-full bg-gray-800 text-yellow-500 rounded-lg py-3 px-2 text-center hover:bg-gray-700 transition-colors duration-300" onclick="closeMenu()">
+            <i class="fas fa-quote-right text-3xl mb-1"></i>
+            <span class="text-lg">Testimonials</span>
+        </a>
+    </div>
+    <div class="flex flex-col items-center w-1/2 p-1">
+        <a href="#faq" class="flex flex-col items-center w-full bg-gray-800 text-yellow-500 rounded-lg py-3 px-2 text-center hover:bg-gray-700 transition-colors duration-300" onclick="closeMenu()">
+            <i class="fas fa-question-circle text-3xl mb-1"></i>
+            <span class="text-lg">FAQ</span>
+        </a>
+    </div>
+    <div class="flex flex-col items-center w-1/2 p-1">
+        <a href="#contact" class="flex flex-col items-center w-full bg-gray-800 text-yellow-500 rounded-lg py-3 px-2 text-center hover:bg-gray-700 transition-colors duration-300" onclick="closeMenu()">
+            <i class="fas fa-envelope text-3xl mb-1"></i>
+            <span class="text-lg">Contact</span>
+        </a>
+    </div>
+</nav>
+
+    </div>
+</div>
+
+</header>
+
+  
+<!-- Hero Section -->
+<section id="home" class="bg-cover bg-center h-screen flex items-center justify-center relative" style="background-image: url('images/hero.webp');">
+    <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+    <div class="relative z-10 text-center p-6 md:p-10 lg:p-16 text-complement">
+        <h1 class="text-4xl md:text-6xl lg:text-8xl font-black mb-4 text-accent text-outline" data-text="Manducdoc Construction">Manducdoc Construction</h1>
+
+        <h2 class="text-2xl md:text-3xl lg:text-5xl font-bold mb-4">Building the Future with Excellence</h2>
+        <a href="#projects" class="inline-block bg-accent text-primary px-4 py-2 md:px-6 md:py-3 font-semibold rounded hover:bg-primary hover:text-accent transition-colors duration-300">Explore Our Projects</a>
+    </div>
+</section>
+
+
+<!-- Projects Section -->
+<section id="projects" class="py-20 bg-gray-100 min-h-screen relative">
+  <div class="w-full h-auto flex flex-col justify-center items-center">
+    <h3 class="text-4xl md:text-5xl lg:text-7xl font-black text-primary mb-12 text-center">Our Projects</h3>
+    <div class="carousel w-[80%] h-[60vh] overflow-hidden relative">
+      <div class="carousel-inner flex transition-transform duration-500 ease-in-out h-full">
+        <!-- Project 1 -->
+<div id="project1" class="carousel-item relative flex-shrink-0 w-full h-full flex items-center justify-center bg-white shadow-lg rounded-lg overflow-hidden">
+  <div class="w-full h-full flex flex-col md:flex-row">
+    <!-- Carousel for Project Images -->
+    <div class="carousel-images w-full md:w-1/2 h-full overflow-hidden relative">
+      <div class="carousel-images-inner flex transition-transform duration-500 ease-in-out h-full">
+        <!-- Image 1 -->
+        <div class="carousel-image flex-shrink-0 w-full h-full">
+          <img src="images/projects/proj1-1.webp" class="w-full h-full object-cover" />
+        </div>
+        <!-- Image 2 -->
+        <div class="carousel-image flex-shrink-0 w-full h-full">
+          <img src="images/projects/proj1-2.webp" class="w-full h-full object-cover" />
+        </div>
+        <!-- Image 3 -->
+        <div class="carousel-image flex-shrink-0 w-full h-full">
+          <img src="images/projects/proj1-3.webp" class="w-full h-full object-cover" />
+        </div>
+        <!-- Image 4 -->
+        <div class="carousel-image flex-shrink-0 w-full h-full">
+          <img src="images/projects/proj1-4.webp" class="w-full h-full object-cover" />
+        </div>
+        <!-- Image 5 -->
+        <div class="carousel-image flex-shrink-0 w-full h-full">
+          <img src="images/projects/proj1-5.webp" class="w-full h-full object-cover" />
+        </div>
+      </div>
+      <!-- Indicator Buttons -->
+      <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+        <button class="btn btn-circle bg-primary text-white hover:bg-accent indicator-button hover:text-primary" data-index="0">1</button>
+        <button class="btn btn-circle bg-primary text-white hover:bg-accent indicator-button hover:text-primary" data-index="1">2</button>
+        <button class="btn btn-circle bg-primary text-white hover:bg-accent indicator-button hover:text-primary" data-index="2">3</button>
+        <button class="btn btn-circle bg-primary text-white hover:bg-accent indicator-button hover:text-primary" data-index="3">4</button>
+        <button class="btn btn-circle bg-primary text-white hover:bg-accent indicator-button hover:text-primary" data-index="4">5</button>
+      </div>
+    </div>
+    <!-- Project Details -->
+    <div class="w-full md:w-1/2 p-6 flex flex-col justify-center bg-gray-50 shadow-inner rounded-r-lg">
+      <h4 class="text-3xl font-bold mb-4">House Renovation</h4>
+      <p class="text-lg text-gray-700">Location: Brgy. Maahas, Los Banos, Laguna</p>
+    </div>
+  </div>
+</div>
+
+        <!-- Project 2 -->
+        <div id="project2" class="carousel-item relative flex-shrink-0 w-full h-full flex items-center justify-center bg-white shadow-lg rounded-lg">
+          <div class="w-full h-full flex flex-col md:flex-row">
+            <!-- Carousel for Project Images -->
+            <div class="carousel-images w-full md:w-1/2 h-full overflow-hidden relative">
+              <div class="carousel-images-inner flex transition-transform duration-500 ease-in-out h-full">
+                <!-- Image 1 -->
+                <div class="carousel-image flex-shrink-0 w-full h-full">
+                  <img src="images/projects/proj2-1.webp" class="w-full h-full object-cover" />
+                </div>
+                <!-- Image 2 -->
+                <div class="carousel-image flex-shrink-0 w-full h-full">
+                  <img src="images/projects/proj2-2.webp" class="w-full h-full object-cover" />
+                </div>
+                <div class="carousel-image flex-shrink-0 w-full h-full">
+                  <img src="images/projects/proj2-3.webp" class="w-full h-full object-cover" />
+                </div>
+                <div class="carousel-image flex-shrink-0 w-full h-full">
+                  <img src="images/projects/proj2-4.webp" class="w-full h-full object-cover" />
+                </div>
+              </div>
+              <!-- Indicator Buttons -->
+              <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                <button class="btn btn-circle bg-primary text-white hover:bg-accent indicator-button hover:text-primary" data-index="0">1</button>
+                <button class="btn btn-circle bg-primary text-white hover:bg-accent indicator-button hover:text-primary" data-index="1">2</button>
+                <button class="btn btn-circle bg-primary text-white hover:bg-accent indicator-button hover:text-primary" data-index="2">3</button>
+                <button class="btn btn-circle bg-primary text-white hover:bg-accent indicator-button hover:text-primary" data-index="3">4</button>
+              </div>
+            </div>
+            <!-- Project Details -->
+            <div class="w-full md:w-1/2 p-6 flex flex-col justify-center">
+              <h4 class="text-2xl font-bold mb-2">Perimeter Fence</h4>
+              <p>Location: Amaia Series Nuvali
+                Canlubang, Calamba City, Laguna</p>
+            </div>
+          </div>
+        </div>
+        <!-- Project 3 -->
+        <div id="project3" class="carousel-item relative flex-shrink-0 w-full h-full flex items-center justify-center bg-white shadow-lg rounded-lg">
+          <div class="w-full h-full flex flex-col md:flex-row">
+            <!-- Carousel for Project Images -->
+            <div class="carousel-images w-full md:w-1/2 h-full overflow-hidden relative">
+              <div class="carousel-images-inner flex transition-transform duration-500 ease-in-out h-full">
+                <!-- Image 1 -->
+                <div class="carousel-image flex-shrink-0 w-full h-full">
+                  <img src="images/projects/proj3-1.webp.png" class="w-full h-full object-cover" />
+                </div>
+                <!-- Image 2 -->
+                <div class="carousel-image flex-shrink-0 w-full h-full">
+                  <img src="https://img.daisyui.com/images/stock/photo-1585084698238-b84830b9e8b2.webp" class="w-full h-full object-cover" />
+                </div>
+                <!-- Add more images as needed -->
+              </div>
+              <!-- Indicator Buttons -->
+              <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                <button class="btn btn-circle bg-primary text-white hover:bg-secondary" data-index="0"></button>
+                <button class="btn btn-circle bg-primary text-white hover:bg-secondary" data-index="1"></button>
+                <!-- Add more indicators as needed -->
+              </div>
+            </div>
+            <!-- Project Details -->
+            <div class="w-full md:w-1/2 p-6 flex flex-col justify-center">
+              <h4 class="text-2xl font-bold mb-2">Office Space</h4>
+              <p class="mb-2">Scope: Modern office space with state-of-the-art facilities.</p>
+              <p>Location: Cebu City, Philippines</p>
+            </div>
+          </div>
+        </div>
+        <!-- Project 4 -->
+        <div id="project4" class="carousel-item relative flex-shrink-0 w-full h-full flex items-center justify-center bg-white shadow-lg rounded-lg">
+          <div class="w-full h-full flex flex-col md:flex-row">
+            <!-- Carousel for Project Images -->
+            <div class="carousel-images w-full md:w-1/2 h-full overflow-hidden relative">
+              <div class="carousel-images-inner flex transition-transform duration-500 ease-in-out h-full">
+                <!-- Image 1 -->
+                <div class="carousel-image flex-shrink-0 w-full h-full">
+                  <img src="https://img.daisyui.com/images/stock/photo-1568724234-2c227cbe47f5.webp" class="w-full h-full object-cover" />
+                </div>
+                <!-- Image 2 -->
+                <div class="carousel-image flex-shrink-0 w-full h-full">
+                  <img src="https://img.daisyui.com/images/stock/photo-1588792437797-99f394d90854.webp" class="w-full h-full object-cover" />
+                </div>
+                <!-- Add more images as needed -->
+              </div>
+              <!-- Indicator Buttons -->
+              <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                <button class="btn btn-circle bg-primary text-white hover:bg-secondary" data-index="0"></button>
+                <button class="btn btn-circle bg-primary text-white hover:bg-secondary" data-index="1"></button>
+                <!-- Add more indicators as needed -->
+              </div>
+            </div>
+            <!-- Project Details -->
+            <div class="w-full md:w-1/2 p-6 flex flex-col justify-center">
+              <h4 class="text-2xl font-bold mb-2">Retail Store</h4>
+              <p class="mb-2">Scope: High-end retail store with contemporary design.</p>
+              <p>Location: Davao City, Philippines</p>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+    </div>
+  </div>
+   <!-- Navigation Buttons -->
+   <div class="absolute left-16 right-16 top-1/2 flex -translate-y-1/2 transform justify-between">
+    <button class="btn btn-circle bg-primary text-white hover:bg-accent hover:text-primary" id="prevSlide">❮</button>
+    <button class="btn btn-circle bg-primary text-white hover:bg-accent hover:text-primary" id="nextSlide">❯</button>
+  </div>
+</section>
+
+
+
+
+
+ <!-- Services Section -->
+<section id="services" class="py-20 bg-white px-4">
+  <div class="container mx-auto text-center">
+    <h3 class="text-4xl md:text-5xl lg:text-7xl font-black text-primary mb-12">Our Services</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8">
+      <!-- Service Card 1 -->
+      <div class="bg-gray-200 text-white lg:rounded-lg shadow-lg relative overflow-hidden pb-6">
+        <img src="images/structural.webp" alt="Structural Works" class="w-full h-44 object-cover mb-6">
+        <h4 class="text-2xl font-bold mb-4 text-primary">Structural Works</h4>
+        <p class="text-gray-600">High-quality structural work to ensure the safety and durability of your projects.</p>
+      </div>
+      <!-- Service Card 2 -->
+      <div class="bg-gray-200 text-white lg:rounded-lg shadow-lg relative overflow-hidden pb-6">
+        <img src="images/architectural.webp" alt="Architectural Works" class="w-full h-44 object-cover mb-6">
+        <h4 class="text-2xl font-bold mb-4 text-primary">Architectural Works</h4>
+        <p class="text-gray-600">Expert architectural designs that blend functionality with aesthetics.</p>
+      </div>
+      <!-- Service Card 3 -->
+      <div class="bg-gray-200 text-white lg:rounded-lg shadow-lg relative overflow-hidden pb-6">
+        <img src="images/plumbing.webp" alt="Plumbing Works" class="w-full h-44 object-cover mb-6">
+        <h4 class="text-2xl font-bold mb-4 text-primary">Plumbing Works</h4>
+        <p class="text-gray-600">Reliable plumbing solutions for residential and commercial spaces.</p>
+      </div>
+      <!-- Service Card 4 -->
+      <div class="bg-gray-200 text-white lg:rounded-lg shadow-lg relative overflow-hidden pb-6">
+        <img src="images/electrical.webp" alt="Electrical Works" class="w-full h-44 object-cover mb-6">
+        <h4 class="text-2xl font-bold mb-4 text-primary">Electrical Works</h4>
+        <p class="text-gray-600">Safe and efficient electrical installations and repairs.</p>
+      </div>
+      <!-- Service Card 5 -->
+      <div class="bg-gray-200 text-white lg:rounded-lg shadow-lg relative overflow-hidden pb-6">
+        <img src="images/painting.webp" alt="Painting Works" class="w-full h-44 object-cover mb-6">
+        <h4 class="text-2xl font-bold mb-4 text-primary">Painting Works</h4>
+        <p class="text-gray-600">Professional painting services to enhance the look and feel of your space.</p>
+      </div>
+      <!-- Service Card 6 -->
+      <div class="bg-gray-200 text-white lg:rounded-lg shadow-lg relative overflow-hidden pb-6">
+        <img src="images/acp-cladding.webp" alt="ACP Cladding" class="w-full h-44 object-cover mb-6">
+        <h4 class="text-2xl font-bold mb-4 text-primary">ACP Cladding</h4>
+        <p class="text-gray-600">Durable and stylish ACP cladding solutions for modern buildings.</p>
+      </div>
+      <!-- Service Card 7 -->
+      <div class="bg-gray-200 text-white lg:rounded-lg shadow-lg relative overflow-hidden pb-6">
+        <img src="images/acrylic-signage.webp" alt="Acrylic Signage" class="w-full h-44 object-cover mb-6">
+        <h4 class="text-2xl font-bold mb-4 text-primary">Acrylic Signage</h4>
+        <p class="text-gray-600">Custom acrylic signage for your business and branding needs.</p>
+      </div>
+      <!-- Service Card 8 -->
+      <div class="bg-gray-200 text-white lg:rounded-lg shadow-lg relative overflow-hidden pb-6">
+        <img src="images/stainless-signage.webp" alt="Stainless Signage" class="w-full h-44 object-cover mb-6">
+        <h4 class="text-2xl font-bold mb-4 text-primary">Stainless Signage</h4>
+        <p class="text-gray-600">Premium stainless steel signage solutions for a modern look.</p>
+      </div>
+      <!-- Service Card 9 -->
+      <div class="bg-gray-200 text-white lg:rounded-lg shadow-lg relative overflow-hidden pb-6">
+        <img src="images/glass-aluminum.webp" alt="Glass and Aluminum Works" class="w-full h-44 object-cover mb-6">
+        <h4 class="text-2xl font-bold mb-4 text-primary">Glass and Aluminum Works</h4>
+        <p class="text-gray-600">High-quality glass and aluminum works for a sleek finish to your projects.</p>
+      </div>
+      <!-- Service Card 10 -->
+      <div class="bg-gray-200 text-white lg:rounded-lg shadow-lg relative overflow-hidden pb-6">
+        <img src="images/house-renovation.webp" alt="House Renovation & Construction" class="w-full h-44 object-cover mb-6">
+        <h4 class="text-2xl font-bold mb-4 text-primary">House Renovation & Construction</h4>
+        <p class="text-gray-600">Expert house renovation and construction services to build your dream home.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  
+
+  <!-- Testimonial Section -->
+<section id="testimonials" class="py-20 bg-white">
+  <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+    <!-- Left Side: Heading -->
+    <div class="w-full md:w-1/3 text-left mb-12 md:mb-0">
+      <h3 class="text-4xl font-bold mb-6">What Our Clients Say</h3>
+      <p class="text-lg text-gray-600">We strive to provide the best service to our clients and here's what they say about us.</p>
+    </div>
+
+    <!-- Right Side: Testimonials -->
+    <div class="w-full md:w-2/3">
+      <div class="space-y-6">
+        <!-- Testimonial 1 -->
+        <div class="flex items-start bg-gray-100 p-6 rounded-lg shadow-lg">
+          <img src="images/client1.jpg" alt="Client 1" class="w-16 h-16 rounded-full mr-4">
+          <div>
+            <h4 class="font-bold text-lg">Mehwish</h4>
+            <p class="text-gray-600">"Compliment introduction stimulated apartments off." </p>
+          </div>
+        </div>
+        <!-- Testimonial 2 -->
+        <div class="flex items-start bg-gray-100 p-6 rounded-lg shadow-lg">
+          <img src="images/client2.jpg" alt="Client 2" class="w-16 h-16 rounded-full mr-4">
+          <div>
+            <h4 class="font-bold text-lg">Elizabeth Jeff</h4>
+            <p class="text-gray-600">"Dear so sing when in find read of call." </p>
+          </div>
+        </div>
+        <!-- Testimonial 3 -->
+        <div class="flex items-start bg-gray-100 p-6 rounded-lg shadow-lg">
+          <img src="images/client3.jpg" alt="Client 3" class="w-16 h-16 rounded-full mr-4">
+          <div>
+            <h4 class="font-bold text-lg">Emily Thomas</h4>
+            <p class="text-gray-600">"Never eat water me might. On formed merits hunted unable merely by mr whence or."</p>
+          </div>
+        </div>
+        <!-- Testimonial 4 -->
+        <div class="flex items-start bg-gray-100 p-6 rounded-lg shadow-lg">
+          <img src="images/client4.jpg" alt="Client 4" class="w-16 h-16 rounded-full mr-4">
+          <div>
+            <h4 class="font-bold text-lg">Michael Brown</h4>
+            <p class="text-gray-600">"From noise to they four built up he went fancy way." </p>
+          </div>
+        </div>
+        <!-- Testimonial 5 -->
+        <div class="flex items-start bg-gray-100 p-6 rounded-lg shadow-lg">
+          <img src="images/client5.jpg" alt="Client 5" class="w-16 h-16 rounded-full mr-4">
+          <div>
+            <h4 class="font-bold text-lg">Sarah Connor</h4>
+            <p class="text-gray-600">"On friendship he advantages of discretion for your." </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- FAQ Section -->
+<section id="faq" class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold text-gray-800">Frequently Asked Questions</h2>
+      <p class="text-gray-600 mt-4">Find answers to the most common questions about our construction services.</p>
+    </div>
+
+    <!-- FAQ Items -->
+    <div class="space-y-8">
+      <!-- FAQ Item 1 -->
+      <div class="bg-white shadow-lg rounded-lg p-6">
+        <h3 class="text-xl font-semibold text-gray-700">What services do you offer?</h3>
+        <p class="text-gray-600 mt-2">We offer a full range of construction services, including structural works, architectural designs, plumbing, electrical installations, and custom home renovations.</p>
+      </div>
+
+      <!-- FAQ Item 2 -->
+      <div class="bg-white shadow-lg rounded-lg p-6">
+        <h3 class="text-xl font-semibold text-gray-700">How long does a typical project take?</h3>
+        <p class="text-gray-600 mt-2">The duration of a project depends on its complexity. Typically, residential projects take 3-6 months, while larger commercial projects may take longer.</p>
+      </div>
+
+      <!-- FAQ Item 3 -->
+      <div class="bg-white shadow-lg rounded-lg p-6">
+        <h3 class="text-xl font-semibold text-gray-700">Do you provide free estimates?</h3>
+        <p class="text-gray-600 mt-2">Yes, we offer free initial consultations and estimates for all potential clients. Contact us to schedule a consultation.</p>
+      </div>
+
+      <!-- FAQ Item 4 -->
+      <div class="bg-white shadow-lg rounded-lg p-6">
+        <h3 class="text-xl font-semibold text-gray-700">Are you licensed and insured?</h3>
+        <p class="text-gray-600 mt-2">Yes, we are fully licensed and insured to ensure the safety and quality of all our construction projects.</p>
+      </div>
+
+      <!-- FAQ Item 5 -->
+      <div class="bg-white shadow-lg rounded-lg p-6">
+        <h3 class="text-xl font-semibold text-gray-700">Can you handle both residential and commercial projects?</h3>
+        <p class="text-gray-600 mt-2">Absolutely! We have experience in both residential and commercial construction projects, from small home renovations to large commercial builds.</p>
+      </div>
+
+      <!-- More FAQ items can be added here as needed -->
+    </div>
+  </div>
+</section>
+
+
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-20 bg-white">
+    <div class="container mx-auto">
+      <h3 class="text-4xl font-bold text-primary mb-12 text-center">Get in Touch</h3>
+      <form class="max-w-lg mx-auto">
+        <div class="mb-6">
+          <label for="name" class="block text-primary font-semibold">Name</label>
+          <input type="text" id="name" class="w-full p-3 border border-gray-300 rounded" placeholder="Your Name">
+        </div>
+        <div class="mb-6">
+          <label for="email" class="block text-primary font-semibold">Email</label>
+          <input type="email" id="email" class="w-full p-3 border border-gray-300 rounded" placeholder="Your Email">
+        </div>
+        <div class="mb-6">
+          <label for="message" class="block text-primary font-semibold">Message</label>
+          <textarea id="message" class="w-full p-3 border border-gray-300 rounded" placeholder="Your Message"></textarea>
+        </div>
+        <button type="submit" class="w-full bg-accent text-primary font-semibold p-3 rounded hover:bg-primary hover:text-accent">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-primary text-complement p-6 text-center">
+    <p>&copy; 2024 Construction Company. All Rights Reserved.</p>
+    <div class="mt-4 space-x-4">
+      <a href="#" class="hover:underline">Facebook</a>
+      <a href="#" class="hover:underline">Instagram</a>
+      <a href="#" class="hover:underline">LinkedIn</a>
+    </div>
+  </footer>
+
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>
